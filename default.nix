@@ -4,9 +4,11 @@ let
 
   fpm = pkgs.callPackage ./fpm {};
 
-  nixRelease = (import ./nix/release.nix {});
+  nixRelease = (import (fetchTarball https://github.com/edolstra/flake-compat/archive/master.tar.gz) {
+    src = ./nix;
+  }).defaultNix;
 
-  nix = nixRelease.build.x86_64-linux.overrideAttrs (old: {
+  nix = nixRelease.defaultPackage.x86_64-linux.overrideAttrs (old: {
     # FIXME: one test fails
     doInstallCheck = false;
   });
@@ -25,6 +27,12 @@ let
     fi
   '';
 
+
+  proxy_env = ''
+     # export  http_proxy=http://127.0.0.1:8123
+     # export  https_proxy=http://127.0.0.1:8123
+  '';
+  
   daemonStartupScript = pkgs.writeScript "start-daemon.sh" ''
     #!/bin/sh
 
@@ -43,6 +51,7 @@ let
     fi
 
     exec ${nix}/bin/nix-daemon --daemon
+    ${proxy_env}
   '';
 
   buildFor = outputFormat: pkgs.stdenv.mkDerivation {
@@ -106,7 +115,7 @@ let
         --input-type dir \
         --output-type ${outputFormat} \
         --name nix \
-        --version 2.3.3 \
+        --version 3.0.master \
         --maintainer "Eelco Dolstra <eelco.dolstra@logicblox.com>" \
         --vendor NixOS \
         --url https://nixos.org/nix/ \
