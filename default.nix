@@ -115,7 +115,7 @@ let
         --input-type dir \
         --output-type ${outputFormat} \
         --name nix \
-        --version 3.0.master \
+        --version nix-3.0pre19700101 \
         --maintainer "Eelco Dolstra <eelco.dolstra@logicblox.com>" \
         --vendor NixOS \
         --url https://nixos.org/nix/ \

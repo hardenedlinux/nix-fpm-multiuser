@@ -66,12 +66,14 @@
   };
   fpm = {
     dependencies = ["arr-pm" "backports" "cabin" "childprocess" "clamp" "ffi" "json" "pleaserun" "ruby-xz" "stud"];
+    groups = ["default"];
+    platforms = [];
     source = {
       fetchSubmodules = false;
       rev = "c12678536f45b6ea564a07f9a0ff522215d476d1";
       sha256 = "1p8cx284i2zfyd54awankxgazp6gyrqjwq1imvb030m9qnbkxf1s";
       type = "git";
-      url = "git://github.com/dezgeg/fpm.git";
+      url = "https://github.com/dezgeg/fpm.git";
     };
     version = "1.10.0";
   };
@@ -94,6 +96,8 @@
     version = "0.3.1";
   };
   json = {
+    groups = ["default"];
+    platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
       sha256 = "0qmj7fypgb9vag723w1a49qihxrcf5shzars106ynw2zk352gbv5";
