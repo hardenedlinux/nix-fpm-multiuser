@@ -83,6 +83,7 @@ let
 
       cp ${nix}/lib/systemd/system/nix-daemon.* .
       sed -i nix-daemon.service -e 's|ExecStart=.*|ExecStart=/opt/nix-multiuser/start-daemon.sh|'
+      sed -i "10iRestart=always" nix-daemon.service
       pathsToCopy+=" nix-daemon.service=$systemdUnitDir/nix-daemon.service"
       pathsToCopy+=" nix-daemon.socket=$systemdUnitDir/nix-daemon.socket"
 
@@ -115,7 +116,7 @@ let
         --input-type dir \
         --output-type ${outputFormat} \
         --name nix \
-        --version nix-3.0pre19700101 \
+        --version 3.0.pre19700101.master \
         --maintainer "Eelco Dolstra <eelco.dolstra@logicblox.com>" \
         --vendor NixOS \
         --url https://nixos.org/nix/ \
