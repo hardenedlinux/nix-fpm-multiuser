@@ -50,8 +50,8 @@ let
       fi
     fi
 
-    exec ${nix}/bin/nix-daemon --daemon
     ${proxy_env}
+    exec ${nix}/bin/nix-daemon --daemon
   '';
 
   buildFor = outputFormat: pkgs.stdenv.mkDerivation {
@@ -116,7 +116,7 @@ let
         --input-type dir \
         --output-type ${outputFormat} \
         --name nix \
-        --version 3.0.pre19700101.master \
+        --version 3.0.pre19700103.master \
         --maintainer "Eelco Dolstra <eelco.dolstra@logicblox.com>" \
         --vendor NixOS \
         --url https://nixos.org/nix/ \
